@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'agritech',
-    password: 'agritech',
+    password: 'wantdigitalnation',
     database: 'agritech_ttn'
 });
 
