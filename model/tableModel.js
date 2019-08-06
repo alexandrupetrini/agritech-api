@@ -4,6 +4,7 @@ var table = {
     'name': 'sensor_data',
     'collumns': ['time', 'temperature', 'humidity']
 }
+
 var sql = require('../config/db');
 var moment = require('moment')
 
