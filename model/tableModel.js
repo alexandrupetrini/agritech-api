@@ -1,11 +1,11 @@
-'user strict';
+'use strict';
 
 var table = {
     'name': 'sensor_data',
     'collumns': ['time', 'temperature', 'humidity']
 }
 
-var sql = require('../config/db');
+var dbConnection = require('../config/db');
 var moment = require('moment')
 
 var Table = function (table) {
@@ -20,7 +20,7 @@ Table.echo_data = function (result) {
 Table.getSensorsData = function (result) {
     let query = "SELECT " + table.collumns.toString() + " FROM " + table.name;
 
-    sql.query(query, function (err, rows) {
+    dbConnection.query(query, function (err, rows) {
         if (err) {
             console.log("error: ", err);
             result(err, null);

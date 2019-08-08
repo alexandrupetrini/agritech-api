@@ -1,15 +1,16 @@
 var mysql = require('mysql');
 
 //local mysql db connection
-var connection = mysql.createConnection({
+var dbConnection = mysql.createConnection({
     host: 'localhost',
     user: 'agritech',
     password: 'wantdigitalnation',
     database: 'agritech_ttn'
 });
 
-connection.connect(function (err) {
+dbConnection.connect(function (err) {
     if (err) throw err;
+    console.log('Dababase connected');
 });
 
-module.exports = connection;
+module.exports = dbConnection;
