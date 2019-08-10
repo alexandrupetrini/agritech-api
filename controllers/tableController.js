@@ -1,5 +1,5 @@
 'use strict';
-var Table = require("../model/tableModel")
+var Table = require("../models/tableModel")
 
 exports.get_sensors_data = function (req, res) {
     Table.getSensorsData(function (err, data) {
