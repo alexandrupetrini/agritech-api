@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var dotenv = require('dotenv').config();
 var ttn = require('./controllers/ttnController').store();
 
 var indexRouter = require('./routes/index');

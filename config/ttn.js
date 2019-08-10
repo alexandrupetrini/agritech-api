@@ -1,6 +1,8 @@
+var dotenv = require('dotenv').config();
+
 const ttnConnection = {
-    appID: "digital-nation-use-case-1",
-    accessKey: "ttn-account-v2.xNqpGaPSJqrLo8sujwTmyceO6ZXbaDUgjPbxeUA2zB8"
+  appID: process.env.TTN_APP_ID,
+  accessKey: process.env.TTN_ACCESS_KEY
 };
 
 module.exports = ttnConnection;
