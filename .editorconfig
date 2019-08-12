@@ -1,15 +1,17 @@
 # http://editorconfig.org
-root = true
+# root = true
 
 [*]
 indent_style = space
-indent_size = 4
+indent_size = 2
+prettier.tabWidth = 2
 charset = utf-q
 trim_trailing_whitespace = false
 insert_final_newline = false
-prettier.tabWidth = 4
 
 [*.js]
-indent_size = 4
-prettier.tabWidth = 4
+indent_style = space
+indent_size = 2
+prettier.tabWidth = 2
+
 
