@@ -13,13 +13,6 @@ TTN.store = function() {
         console.log('Received uplink from', devID);
 
         if (payload.counter != undefined) {
-          console.log(payload);
-
-          var hardware_serial = payload.hardware_serial;
-          var port = payload.port;
-          var counter = payload.counter;
-          var payload_raw = payload.payload_raw;
-
           // Do not convert the date time to local timezone.
           // payload.metadata.time: The timezone is zero UTC offset
           // Keep it in UTC format, users can convert the date time to their local time zone.
@@ -36,48 +29,40 @@ TTN.store = function() {
           // Because of this I have decided to store the time as a VARCHAR and NOT as a DATETIME(6)
           //
 
-          var time = payload.metadata.time;
-          var frequency = payload.metadata.frequency;
-          var modulation = payload.metadata.modulation;
-          var data_rate = payload.metadata.data_rate;
-          var airtime = payload.metadata.airtime;
-          var coding_rate = payload.metadata.coding_rate;
-          var gateways = JSON.stringify(payload.metadata.gateways);
-          var humidity = payload.payload_fields.humidity / 100;
-          var temperature = payload.payload_fields.temperature;
-
-          // console.log('hardware_serial=', hardware_serial);
-          // console.log('port=', port);
-          // console.log('counter=', counter);
-          // console.log('payload_raw=', payload_raw);
-          // console.log('time=', time);
-          // console.log('frequency=', frequency);
-          // console.log('modulation=', modulation);
-          // console.log('data_rate=', data_rate);
-          // console.log('airtime=', airtime);
-          // console.log('coding_rate=', coding_rate);
-          // console.log('gateways=', gateways);
-
-          const query = 'INSERT INTO sensor_data SET ?';
-          const values = {
-            hardware_serial: hardware_serial,
-            port: port,
-            counter: counter,
-            payload_raw: payload_raw,
-            time: time,
-            frequency: frequency,
-            modulation: modulation,
-            data_rate: data_rate,
-            airtime: airtime,
-            coding_rate: coding_rate,
-            gateways: gateways,
-            humidity: humidity,
-            temperature: temperature
+          var values = {
+            hardware_serial: payload.hardware_serial,
+            port: payload.port,
+            counter: payload.counter,
+            payload_raw: payload.payload_raw,
+            time: payload.metadata.time,
+            frequency: payload.metadata.frequency,
+            modulation: payload.metadata.modulation,
+            data_rate: payload.metadata.data_rate,
+            airtime: payload.metadata.airtime,
+            coding_rate: payload.metadata.coding_rate,
+            gateways: JSON.stringify(payload.metadata.gateways),
+            humidity: payload.payload_fields.humidity / 100,
+            temperature: payload.payload_fields.temperature
           };
 
-          dbConnection.query(query, values, function(err, results) {
-            if (err) throw err;
-            console.log('Record inserted: ', results.insertId);
+          var collumns = Object.keys(values);
+          var collumnsValues = Object.values(values);
+          var placeholders = collumns.map((name) => '?').join(',');
+          var query =
+            'INSERT INTO sensor_data(' +
+            collumns.toString() +
+            ') VALUES (' +
+            placeholders +
+            ')';
+          // console.log(query);
+
+          dbConnection.serialize(function() {
+            dbConnection.run(query, collumnsValues, function(err) {
+              if (err) {
+                return console.error(err.message);
+              }
+              console.log(`A row has been inserted with rowid ${this.lastID}`);
+            });
           });
         }
       });
