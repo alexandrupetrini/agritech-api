@@ -1,17 +1,15 @@
-var mysql = require('mysql');
+var sqlite3 = require('sqlite3');
 var dotenv = require('dotenv').config();
+var sqlite3 = require('sqlite3').verbose();
 
 //local mysql db connection
-var dbConnection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD
-});
-
-dbConnection.connect(function(err) {
-  if (err) throw err;
-  console.log('Dababase connected');
-});
-
+var dbConnection = new sqlite3.Database(
+  (path = process.env.DB_DATABASE),
+  (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to', process.env.DB_DATABASE, 'database');
+  }
+);
 module.exports = dbConnection;

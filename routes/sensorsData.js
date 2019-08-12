@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var TableController = require("../controllers/tableController");
+var SensorsDataController = require('../controllers/sensorsDataController');
 
-router.get('/', TableController.get_sensors_data);
+router.get('/', SensorsDataController.get_sensors_data);
 
 module.exports = router;
