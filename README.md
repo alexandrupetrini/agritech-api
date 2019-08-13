@@ -4,8 +4,8 @@
 * [db.js](config/db.js) - database connection 
 * [ttn.js](config/ttn.js) - [thethingsnetwork.org](https://thethingsnetwork.org/) console connection
 * [sensorsData.js](routes/sensorsData.js) - actual route from where we get data in json format
-* [tableModel.js](model/tableModel.js) - javascript Model class for accessing "sensors_data" table from "agritech_ttn" database
-* [tableController](controller/tableController.js) - javascript Controller class for passing it's methods to views
+* [sensorsDataModel.js](models/sensorsDataModel.js) - javascript Model class for accessing "sensors_data" table from "agritech_ttn" database
+* [sensorsDataController.js](controllers/sensorsDataController.js) - javascript Controller class for passing it's methods to views
 ### Note: Checkout [MVC pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)!
 
 ## ToDo
