@@ -2,7 +2,7 @@
 
 var table = {
   name: 'sensor_data',
-  collumns: ['time', 'temperature', 'humidity']
+  collumns: ['time', 'temperature', 'humidity', 'gateways']
 };
 
 var dbConnection = require('../config/db');
@@ -31,11 +31,16 @@ SensorsDataTable.getSensorsData = function(result) {
         rows.forEach((row) => {
           let date = moment(row.time).format('DD-MM-YYYY');
           let time = moment(row.time).format('HH:mm');
+          let gateways = JSON.parse(row.gateways);
+          let gateway = gateways[0];
           data.push({
             Data: date,
             Ora: time,
             Temperatura: row.temperature,
-            Umiditate: row.humidity
+            Umiditate: row.humidity,
+            Latitudine: gateway.latitude,
+            Longitudine: gateway.longitude,
+            Altitudine: gateway.altitude
           });
         });
         result(null, data);
