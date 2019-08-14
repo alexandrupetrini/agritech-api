@@ -29,15 +29,11 @@ SensorsDataTable.getSensorsData = function(result) {
         let data = [];
         console.log("Data retrieved from table 'sensor_data'");
         rows.forEach((row) => {
-          let date = moment(row.time).format('YYYY-MM-DD');
-          let hours = moment(row.time).format('hh');
-          let minutes = moment(row.time).format('mm');
-          let time_only_in_hours =
-            parseInt(hours, 10) + parseInt(minutes, 10) / 60;
-          time_only_in_hours += 'PM';
+          let date = moment(row.time).format('DD-MM-YYYY');
+          let time = moment(row.time).format('HH:mm');
           data.push({
             Data: date,
-            Ora: time_only_in_hours,
+            Ora: time,
             Temperatura: row.temperature,
             Umiditate: row.humidity
           });
