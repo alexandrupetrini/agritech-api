@@ -39,8 +39,7 @@ SensorsDataTable.getSensorsData = function(result) {
             Temperatura: row.temperature,
             Umiditate: row.humidity,
             Latitudine: gateway.latitude,
-            Longitudine: gateway.longitude,
-            Altitudine: gateway.altitude
+            Longitudine: gateway.longitude
           });
         });
         result(null, data);
