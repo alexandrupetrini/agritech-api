@@ -1,4 +1,8 @@
-var dbConnection = {};
+'use strict';
+
+var dotenv = require('dotenv').config();
+
+let dbConnection = {};
 switch (process.env.DB_DIALECT) {
   case 'sqlite':
   case 'sqlite3':
