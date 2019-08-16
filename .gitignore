@@ -56,6 +56,7 @@ typings/
 
 # dotenv environment variables file
 # .env
+storage/agritech_ttn.sqlite
 
 # next.js build output
 .next
